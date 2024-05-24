@@ -1,0 +1,7 @@
+__pycache__/
+node_modules/
+src/
+.env
+.DS_Store
+*.xlsx
+dados.py

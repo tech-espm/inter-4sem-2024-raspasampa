@@ -9,20 +9,22 @@
 ### 2024-01
 
 ## Integrantes
-- [nome](https://github.com/tech-espm/)
+- [Giovanna Caroline Sanches Ferreira](https://github.com/gihferreir4)
+- [Guilherme Martins Macedo](https://github.com/gmacedo16)
+- [Guilherme Tamer Lotaif](https://github.com/Guilherme-Lotaif)
+- [Luiz Gustavo da Silva Candido](https://github.com/gustavo-candidoo)
 
 ## Descrição do Projeto
 
-Descrição do Projeto.
+O projeto se baseia na análise da qualidade de vida e das condições básicas de vida na cidade de São Paulo, utilizando dados disponíveis na plataforma Observa Sampa.
 
 ### Problema
 
-Problema.
+São Paulo, a maior metrópole do Brasil, enfrenta grandes desafios de qualidade de vida devido às significativas desigualdades sociais e econômicas. Indicadores como acesso à saúde, educação, saneamento, segurança e moradia ajudam a tomar melhores decisões para a decisão de políticas públicas.
 
 ### Objetivo Final
 
-Objetivo Final.
-
+Identificar áreas com necessidades e propor soluções que contribuam para o bem-estar da população, com foco em populações vulneráveis e na redução das desigualdades.
 
 # Detalhes de Configuração
 

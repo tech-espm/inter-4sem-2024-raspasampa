@@ -1,11 +1,303 @@
-<div class="container-fluid">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<h1>
-		Sobre
-	</h1>
+	<style>
+		body {
+			background-image: url(/public/img/fundo_sobre.jpg);
+			max-width: 100%;
+		}
 
-	<p>
-		Sobre nós! 😊
-	</p>
+		.titulo {
+			font-family: Arial, Helvetica, sans-serif;
+			text-align: center;
+			margin-top: 5rem;
+			font-size: 4rem;
+			animation: animacao-titulo 1s ease-out;
+		}
 
-</div>
+		@keyframes animacao-titulo {
+			0% {
+				opacity: 0;
+				transform: translateY(-1.25rem);
+			}
+
+			100% {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.descricao {
+			margin-top: 5rem;
+			font-size: 1.1rem;
+			margin-bottom: 20rem;
+			text-align: center;
+			animation: animacao-titulo 1s ease-out;
+		}
+
+		.perfil {
+			max-width: 100%;
+			height: auto;
+			border-radius: 1rem;
+		}
+
+		.texto {
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			border-radius: 1rem;
+			margin-top: 0.1rem;
+		}
+
+		.hide {
+			opacity: 0;
+			transition: opacity 3s;
+		}
+
+		.show {
+			opacity: 1;
+			transition: opacity 3s;
+		}
+
+		.scroll-trigger {
+			opacity: 0;
+			transition: opacity 3s;
+		}
+
+		.scroll-trigger.show {
+			opacity: 1;
+		}
+
+		.botao {
+			display: inline-flex;
+			width: 2rem;
+			height: 2rem;
+			border-radius: 1rem;
+		}
+
+		.linkedin {
+			background-image: url(/public/img/LinkedIn.png);
+			max-width: 100%;
+		}
+
+		.github {
+			background-color: white;
+			background-image: url(/public/img/github-mark.png);
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<h1 class="titulo">Sobre nós</h1>
+
+	<h3 class="descricao">
+		Nesta página temos uma breve apresentação de todos os integrantes desse grupo, além de uma história acadêmica de
+		cada um. Desça a página para começar
+	</h3>
+
+	<div class="container-fluid">
+
+		<div class="row">
+
+			<div class="col-sm-6 p-3">
+
+				<img src="/public/img/luiz_gustavo.jpg" class="perfil scroll-trigger">
+
+			</div>
+
+			<div class="texto p-3 col-sm-6">
+
+				<div>
+					<h2 class="mb-3 scroll-trigger">Luiz Gustavo Candido</h2>
+
+					<h4 class="mb-3 scroll-trigger">Idade: 21 anos</h4>
+
+					<p class="texto scroll-trigger">
+						Estagiário na área de modelagem e rentabilidade no Banco Santander e estudante do 4º 
+						semestre do curso de Sistemas de Informação na ESPM-SP. Luiz Gustavo possui conhecimento
+						em machine learning, estatística e finanças.
+					</p>
+
+					<p>
+
+						<a href="https://www.linkedin.com/in/gustavo-candido-499332198/" target="_blank" rel="noopener noreferrer"
+							class="botao linkedin scroll-trigger">
+							<img src="/public/img/LinkedIn.png" alt="botao" />
+						</a>
+
+						<a href="https://github.com/gustavo-candidoo" target="_blank" rel="noopener noreferrer"
+							class="botao scroll-trigger github">
+							<img src="/public/img/github-mark.png" alt="botao" />
+						</a>
+
+					</p>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-sm-6 p-3">
+
+				<img src="/public/img/guilherme_macedo.jpg" class="perfil scroll-trigger">
+
+			</div>
+
+			<div class="p-3 col-sm-6">
+
+				<div class="p-3">
+
+					<h2 class="mb-3 scroll-trigger">Guilherme Macedo</h2>
+
+					<h4 class="mb-3 scroll-trigger">Idade: 22 anos</h4>
+
+					<p class="mb-3 texto scroll-trigger">
+
+						Estagiário na área de pricing na Votorantim Cimentos e estudante do 4º 
+						semestre do curso de Sistemas de Informação na ESPM-SP. Guilherme Macedo possui conhecimento
+						em processos de automação, 
+
+					</p>
+
+					<p>
+
+						<a href="https://www.linkedin.com/in/macedoguilherme16/" target="_blank"
+							rel="noopener noreferrer" class="botao linkedin scroll-trigger">
+							<img src="/public/img/LinkedIn.png" alt="botao" />
+						</a>
+
+						<a href="https://github.com/gmacedo16" target="_blank" rel="noopener noreferrer"
+							class="botao scroll-trigger github">
+							<img src="/public/img/github-mark.png" alt="botao" />
+						</a>
+
+					</p>
+
+				</div>
+
+			</div>
+
+			
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-sm-6 p-3">
+
+				<img src="/public/img/guilherme_tamer.jpg" class="perfil scroll-trigger">
+
+			</div>
+
+			<div class="p-3 col-sm-6">
+
+				<div class="p-3">
+
+					<h2 class="mb-3 scroll-trigger">Guilherme Tamer</h2>
+
+					<h4 class="mb-3 scroll-trigger">Idade: 24 anos</h4>
+
+					<p class="mb-3 texto scroll-trigger">
+
+						Estudante do 4º semestre de Sistemas de Informação na ESPM-SP. Antes, passou pelos
+						cursos de Engenharia Mecânica e Administração no Insper, faculdade renomada em todo 
+						o Brasil. Tamer está em busca de sua primeira oportunidade no mercado de trabalho 
+						e possui conhecimento em desenvolvimento fullstack e ciência de dados.
+					</p>
+
+					<p>
+
+						<a href="https://www.linkedin.com/in/guilherme-lotaif/" target="_blank"
+							rel="noopener noreferrer" class="botao linkedin scroll-trigger">
+							<img src="/public/img/LinkedIn.png" alt="botao" />
+						</a>
+
+						<a href="https://github.com/Guilherme-Lotaif" target="_blank" rel="noopener noreferrer"
+							class="botao scroll-trigger github">
+							<img src="/public/img/github-mark.png" alt="botao" />
+						</a>
+
+					</p>
+
+				</div>
+
+			</div>
+
+			
+
+			
+
+		</div>
+
+		<div class="row">
+
+			<div class="col-sm-6 p-3">
+
+				<img src="/public/img/giovanna_ferreira.jpg" class="perfil scroll-trigger">
+
+			</div>
+
+			<div class="p-3 col-sm-6">
+
+				<div class="p-3">
+
+					<h2 class="mb-3 scroll-trigger">Giovanna Ferreira</h2>
+
+					<h4 class="mb-3 scroll-trigger">Idade: 20 anos</h4>
+
+					<p class="mb-3 texto scroll-trigger">
+
+						Fez High School na Argyle Secondary School no Canadá e atualmente é estudante do 4º 
+						semestre de Sistemas de Informação na ESPM-SP. Giovanna é conhecida pela sua comunicação 
+						e conhecimento em análise e visualização de dados;
+
+					</p>
+
+					<p>
+
+						<a href="https://www.linkedin.com/in/giovanna-caroline-sanches-ferreira-593540271/" target="_blank"
+							rel="noopener noreferrer" class="botao linkedin scroll-trigger">
+							<img src="/public/img/LinkedIn.png" alt="botao" />
+						</a>
+
+						<a href="https://github.com/gihferreir4" target="_blank" rel="noopener noreferrer"
+							class="botao scroll-trigger github">
+							<img src="/public/img/github-mark.png" alt="botao" />
+						</a>
+
+					</p>
+
+				</div>
+
+			</div>
+
+			
+
+		</div>
+
+	</div>
+
+	<script>
+		window.addEventListener('scroll', function () {
+			let elementos = document.querySelectorAll('.scroll-trigger')
+			for (let i = 0; i < elementos.length; i++) {
+				let elemento = elementos[i]
+				let posicaoTopo = elemento.getBoundingClientRect().top
+				let alturaJanela = window.innerHeight
+
+				if (posicaoTopo < alturaJanela * 0.8 && window.scrollY > 0) {
+					elemento.classList.add('show')
+				} else {
+					elemento.classList.remove('show')
+				}
+			}
+		})
+
+	</script>
+</body>
+
+</html>

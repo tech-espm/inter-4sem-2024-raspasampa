@@ -4,18 +4,51 @@
 	https://getbootstrap.com/docs/4.6/components/navbar/
 -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand" href="/">
-		Projeto
-	</a>
-
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Alternar navegação">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-
-	<div class="collapse navbar-collapse" id="navbarToggler">
-		<div class="navbar-nav">
-			<a class="nav-link" href="/sobre">Sobre</a>
-		</div>
-	</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar">
+    <a class="navbar-brand" href="/">
+        RaspaSampa
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Alternar navegação">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggler">
+        <div class="navbar-nav">
+            <a class="nav-link" href="/sobre">Sobre</a>
+            <a class="nav-link" href="/visualizacao">Visualização</a>
+        </div>
+    </div>
 </nav>
+
+
+<style>
+	.custom-navbar {
+    font-family: 'Roboto', sans-serif;
+    background-color: #343a40; /* Mantendo a cor de fundo escura */
+}
+
+.custom-navbar .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: lighter;
+    color: #65869e; /* Mudando a cor do texto da marca */
+}
+
+.custom-navbar .navbar-nav .nav-link {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-left: 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.custom-navbar .navbar-nav .nav-link:hover {
+    color: #65869e; /* Mudando a cor do texto ao passar o mouse */
+}
+
+.custom-navbar .navbar-toggler {
+    border-color: #65869e; /* Mudando a cor da borda do botão de alternância */
+}
+
+.custom-navbar .navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><path stroke="rgba(255, 204, 0, 1)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/></svg>'); /* Mudando a cor do ícone do botão de alternância */
+}
+
+</style>

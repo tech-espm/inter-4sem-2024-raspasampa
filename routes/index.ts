@@ -20,8 +20,18 @@ class IndexRoute {
 		let opcoes = {
 			titulo: "Sobre"
 		};
+	
 
 		res.render("index/sobre", opcoes);
+	}
+	
+	public async visualizacao(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Visualização"
+		};
+	
+
+		res.render("index/visualizacao", opcoes);
 	}
 
 	public async obterDados(req: app.Request, res: app.Response) {

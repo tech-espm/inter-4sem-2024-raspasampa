@@ -1,0 +1,235 @@
+<form class="container-fluid mb-5" id="form">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="card shadow my-4">
+				<div class="card-body">
+					<div class="form-group">
+						<label for="indicador">Indicador</label>
+						<select multiple name="indicador" id="indicador" style="display: none;">
+							<% indicadores.forEach(indicador => { %>
+								<option value="<%= indicador.id_indicador %>"><%= indicador.nome_indicador %></option>
+							<% }); %>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-6">
+			<div class="card shadow my-4">
+				<div class="card-body">
+					<div class="form-group">
+						<label for="bairro">Bairro</label>
+						<select multiple name="bairro" id="bairro" style="display: none;">
+							<% bairros.forEach(bairro => { %>
+								<option value="<%= bairro.id_bairro %>"><%= bairro.nome_bairro %></option>
+							<% }); %>
+						</select>
+					</div>
+					<div class="text-right">
+						<button type="submit" class="btn btn-primary">Listar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card shadow my-4">
+		<div class="card-body" id="div-grafico">
+			<div class="text-center">Escolha os indicadores e bairros e clique em "Listar" para analisar os dados.</div>
+		</div>
+	</div>
+
+</form>
+
+<%- contentFor("espaco-rodape") %>
+
+<script src="/public/js/jquery-validate/jquery.validate.min.js"></script>
+<script src="/public/js/jquery-validate/additional-methods.min.js"></script>
+<script src="/public/js/jquery-validate/localization/messages_pt_BR.min.js"></script>
+<script type="text/javascript" src="/public/js/chart.js/chart.min.js"></script>
+
+<script type="text/javascript">
+	"use strict";
+	let indicador = $("#indicador").filterMultiSelect({
+		placeholderText: "Nada Selecionado",
+		filterText: "Filtro",
+		selectAllText: "Selecionar Tudo",
+		labelText: "",
+		selectionLimit: 5,
+		caseSensitive: false,
+		allowEnablingAndDisabling: false,
+	});
+
+	let bairro = $("#bairro").filterMultiSelect({
+		placeholderText: "Nada Selecionado",
+		filterText: "Filtro",
+		selectAllText: "Selecionar Tudo",
+		labelText: "",
+		selectionLimit: 5,
+		caseSensitive: false,
+		allowEnablingAndDisabling: false,
+	});
+
+	$("#form").validate({
+		rules: {
+			data: {
+				required: true
+			}
+		},
+		submitHandler: function () {
+			atualizarDados();
+		}
+	});
+
+	async function atualizarDados() {
+		waitSwal();
+
+		try {
+
+			let indicadores = JSON.parse(indicador.getSelectedOptionsAsJson()).indicador;
+			let bairros = JSON.parse(bairro.getSelectedOptionsAsJson()).bairro;
+			let response = await fetch("/obterDados", {
+				method: "POST",
+				body: JSON.stringify({
+					indicadores: indicadores,
+					bairros: bairros
+				}),
+				headers: {
+					"content-type": "application/json"
+				}
+			});
+
+			if (response.ok) {
+
+				Swal.close();
+
+				let div = document.getElementById("div-grafico");
+				div.innerHTML = '<canvas id="grafico-barras" style="height: 50vh;"></canvas>';
+
+				let dados = await response.json();
+				if (!dados || !dados.length) {
+					Swal.fire("Erro", "Sem dados para os indicadores e bairros escolhidos!", "error");
+					return;
+				}
+
+				const datasets = [];
+				const labels = [];
+				const cores = [
+					"red",
+					"blue",
+					"green",
+					"magenta",
+					"purple",
+					"orange",
+					"black"
+				];
+
+				dados.forEach(dadosIndicador => {
+					if (!dadosIndicador || !dadosIndicador.length) {
+						return;
+					}
+
+					if (!labels.length) {
+						for (let i = 0; i < dadosIndicador.length; i++) {
+							labels.push(dadosIndicador[i].ano);
+						}
+					}
+
+					const valores = new Array(dadosIndicador.length);
+					for (let i = 0; i < dadosIndicador.length; i++) {
+						valores[i] = dadosIndicador[i].valor;
+					}
+
+					const cor = cores[datasets.length % cores.length];
+					datasets.push({
+						label: dadosIndicador[0].sigla,
+						backgroundColor: cor,
+						hoverBackgroundColor: cor,
+						borderColor: cor,
+						data: valores
+					});
+				});
+
+				if (!datasets.length) {
+					Swal.fire("Erro", "Sem dados para os indicadores e bairros escolhidos!", "error");
+					return;
+				}
+
+				let grafico = new Chart(document.getElementById("grafico-barras"), {
+					type: "line",
+					data: {
+						labels: labels,
+						datasets: datasets,
+					},
+					options: {
+						maintainAspectRatio: false,
+						layout: {
+							padding: {
+								left: 10,
+								right: 25,
+								top: 25,
+								bottom: 0
+							}
+						},
+						scales: {
+							x: {
+								gridLines: {
+									display: false,
+									drawBorder: false
+								},
+								ticks: {
+									maxTicksLimit: 10
+								},
+								maxBarThickness: 25,
+							},
+							y: {
+								//display: false,
+								ticks: {
+									min: 0,
+									max: 10,
+									maxTicksLimit: 10,
+									padding: 10
+								},
+								gridLines: {
+									color: "rgb(234, 236, 244)",
+									zeroLineColor: "rgb(234, 236, 244)",
+									drawBorder: false,
+									borderDash: [2],
+									zeroLineBorderDash: [2]
+								}
+							},
+						},
+						legend: {
+							display: false
+						},
+						tooltips: {
+							titleMarginBottom: 10,
+							titleFontColor: '#6e707e',
+							titleFontSize: 14,
+							backgroundColor: "rgb(255,255,255)",
+							bodyFontColor: "#858796",
+							borderColor: '#dddfeb',
+							borderWidth: 1,
+							xPadding: 15,
+							yPadding: 15,
+							displayColors: false,
+							caretPadding: 10
+						},
+					}
+				});
+
+			} else {
+				await exibirErro(response);
+			}
+
+		} catch (ex) {
+			Swal.fire("Erro", "Erro ao listar os dados: " + ex.message, "error");
+		}
+	}
+
+</script>
+
+<%- contentFor("espaco-head") %>
+<link rel="stylesheet" href="/public/js/multiselect/filter_multi_select.css" />
+<script src="/public/js/multiselect/filter-multi-select-bundle.min.js"></script>

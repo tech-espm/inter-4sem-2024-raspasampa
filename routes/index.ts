@@ -26,27 +26,45 @@ class IndexRoute {
 	}
 	
 	public async visualizacao(req: app.Request, res: app.Response) {
+		let hoje = new Date();
+
+		let mes = hoje.getMonth() + 1;
+		let dia = hoje.getDate();
+		let indicadores: any[];
+		let bairros: any[];
+
+		await app.sql.connect(async sql => {
+			indicadores = await sql.query("SELECT id_indicador, nome_indicador FROM indicador");
+			bairros = await sql.query("SELECT id_bairro, nome_bairro FROM bairro");
+		});
+
 		let opcoes = {
-			titulo: "Visualização"
+			titulo: "Visualização",
+			ano: hoje.getFullYear(),
+			mes: (mes < 10 ? "0" + mes : mes),
+			dia: (dia < 10 ? "0" + dia : dia),
+			indicadores: indicadores,
+			bairros: bairros
 		};
-	
 
 		res.render("index/visualizacao", opcoes);
 	}
 
+	@app.http.post()
 	public async obterDados(req: app.Request, res: app.Response) {
-		let dados = [
-			{ dia: "10/09", valor: 80 },
-			{ dia: "11/09", valor: 92 },
-			{ dia: "12/09", valor: 90 },
-			{ dia: "13/09", valor: 101 },
-			{ dia: "14/09", valor: 105 },
-			{ dia: "15/09", valor: 100 },
-			{ dia: "16/09", valor: 64 },
-			{ dia: "17/09", valor: 78 },
-			{ dia: "18/09", valor: 93 },
-			{ dia: "19/09", valor: 110 }
-		];
+		let indicadores: number[] = req.body?.indicadores || [];
+		let bairros: number[] = req.body?.bairros || [];
+		let dados: any[] = [];
+
+		await app.sql.connect(async sql => {
+			for (let i = 0; i < indicadores.length; i++) {
+				for (let j = 0; j < bairros.length; j++) {
+					const result = await sql.query("select concat(b.nome_bairro, ' / ', i.nome_indicador) sigla, a.ano, ifnull(e.valor, 0) valor from ano a left join evidencia e on e.ano = a.ano and e.id_indicador = ? and e.id_bairro = ? inner join indicador i on i.id_indicador = ? inner join bairro b on b.id_bairro = ? order by a.ano", [indicadores[i], bairros[j], indicadores[i], bairros[j]]);
+
+					dados.push(result);
+				}
+			}
+		});
 
 		res.json(dados);
 	}

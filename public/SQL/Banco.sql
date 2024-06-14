@@ -4,6 +4,8 @@ USE Interdisciplinar_IV_teste20;
 CREATE TABLE bairro (
 	id_bairro int NOT NULL PRIMARY KEY,
     nome_bairro varchar(50) NOT NULL,
+    latitude float,
+    longitude float,
     unique key un_bairro_nome_bairro (nome_bairro)
 );
 

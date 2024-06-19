@@ -95,3 +95,12 @@ body {
 		transform: translateY(0);
 	}
 }
+.logo {
+    height: 35px; /* Ajuste conforme necessário */
+    width: 170px; /* Ajuste conforme necessário */
+}
+
+.mb-3 scroll trigger {
+	text-align: center;
+
+}
